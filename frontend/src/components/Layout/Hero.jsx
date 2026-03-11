@@ -11,14 +11,11 @@ import heroImg2 from "../../assets/avasa kurtas model 3.png";
 import heroImg5 from "../../assets/kurta model1.png";
 import heroImg7 from "../../assets/avasa kurtas model 3.png";
 
-
-// Array of hero images with corresponding routes
 const heroImages = [
   { image: heroImg1, link: "/collection/all?gender=Women" },
   { image: heroImg2, link: "/collection/all?gender=Women" },
   { image: heroImg5, link: "/collection/all?gender=Women" },
   { image: heroImg7, link: "/collection/all?category=Women" },
-
   { image: heroImg8, link: "/collection/all?gender=Women" },
   { image: heroImg6, link: "/collection/all?gender=Men" },
   { image: heroImg3, link: "/collection/all?gender=Women" },
@@ -30,20 +27,21 @@ const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
 
-  // Auto slide every 2 seconds
   useEffect(() => {
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
     }, 2000);
 
     return () => clearInterval(interval);
+
   }, []);
 
-  // Scroll to correct slide (desktop + mobile fix)
   useEffect(() => {
+
     if (sliderRef.current) {
 
-      const sliderWidth = sliderRef.current.offsetWidth;
+      const sliderWidth = sliderRef.current.clientWidth;
 
       sliderRef.current.scrollTo({
         left: currentIndex * sliderWidth,
@@ -51,36 +49,44 @@ const Hero = () => {
       });
 
     }
+
   }, [currentIndex]);
 
   return (
-    <section className="relative overflow-hidden w-full">
+
+    <section className='relative overflow-hidden w-full bg-white'>
 
       <div
         ref={sliderRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full h-[500px] md:h-[650px] lg:h-[750px] xl:h-[800px]"
-        style={{ scrollbarWidth: "none" }}
+        className='flex overflow-x-auto snap-x snap-mandatory scroll-smooth w-full h-[500px] md:h-[650px] lg:h-[750px]'
+        style={{ scrollbarWidth: 'none' }}
       >
 
         {heroImages.map((item, index) => (
+
           <Link
             to={item.link}
             key={index}
-            className="w-full h-full flex-shrink-0 snap-center"
-            style={{ minWidth: "100%" }}
+            className='w-full h-full flex-shrink-0 snap-center'
+            style={{ minWidth: '100%' }}
           >
 
             <img
               src={item.image}
               alt={`Hero ${index + 1}`}
-              className="w-full h-full object-cover"
+              className='w-full h-full object-contain'
             />
 
           </Link>
+
         ))}
 
       </div>
 
     </section>
+
   );
+
 };
+
+export default Hero;
