@@ -11,18 +11,23 @@ import heroImg2 from "../../assets/avasa kurtas model 3.png";
 import heroImg5 from "../../assets/kurta model1.png";
 import heroImg7 from "../../assets/avasa kurtas model 3.png";
 
+import heroimg10 from "../../assets/hero-desk1.png";
+import heroimg11 from "../../assets/hero-desk2.png";
+import heroimg12 from "../../assets/hero-desk3.png";
+
+
 
 // Array of hero images with corresponding routes
 const heroImages = [
-  { image: heroImg1, link: "/collection/all?gender=Women" },
-  { image: heroImg2, link: "/collection/all?gender=Women" },
-  { image: heroImg5, link: "/collection/all?gender=Women" },
-  { image: heroImg7, link: "/collection/all?category=Women" },
+  {  mobile: heroImg1, link: "/collection/all?gender=Women" },
+  {  mobile: heroImg2, link: "/collection/all?gender=Women" },
+  {  mobile: heroImg5, link: "/collection/all?gender=Women" },
+  { desktop: heroImg12, mobile: heroImg7, link: "/collection/all?category=Women" },
 
-  { image: heroImg8, link: "/collection/all?gender=Women" },
-  { image: heroImg6, link: "/collection/all?gender=Men" },
-  { image: heroImg3, link: "/collection/all?gender=Women" },
-  { image: heroImg4, link: "/collection/all?category=Bottom Wear" },
+  {  mobile: heroImg8, link: "/collection/all?gender=Women" },
+  { desktop: heroImg11, mobile: heroImg6, link: "/collection/all?gender=Men" },
+  {  mobile: heroImg3, link: "/collection/all?gender=Women" },
+  { desktop: heroImg10, mobile: heroImg4, link: "/collection/all?category=Bottom Wear" },
 ];
 
 const Hero = () => {
@@ -39,7 +44,7 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Scroll to correct slide (desktop + mobile fix)
+  // Scroll to correct slide
   useEffect(() => {
     if (sliderRef.current) {
 
@@ -70,10 +75,18 @@ const Hero = () => {
             style={{ minWidth: "100%" }}
           >
 
+            {/* Desktop Image */}
             <img
-              src={item.image}
-              alt={`Hero ${index + 1}`}
-              className="w-full h-full object-cover"
+              src={item.desktop}
+              alt={`Hero Desktop ${index + 1}`}
+              className="hidden md:block w-full h-full object-cover"
+            />
+
+            {/* Mobile Image */}
+            <img
+              src={item.mobile}
+              alt={`Hero Mobile ${index + 1}`}
+              className="block md:hidden w-full h-full object-cover"
             />
 
           </Link>
